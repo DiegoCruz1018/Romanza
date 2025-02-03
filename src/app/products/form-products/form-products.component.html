@@ -1,0 +1,26 @@
+<form class="form" (submit)="save()" [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre:</mat-label>
+        <input matInput [formControl]="form.controls.Name">
+        <mat-error>{{getNameErrors()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Precio:</mat-label>
+        <input type="number" matInput [formControl]="form.controls.Price">
+        <mat-error>{{getPriceErrors()}}</mat-error>
+    </mat-form-field>
+
+    <div>
+        <app-input-img title="Imagen del producto"></app-input-img>
+    </div>
+
+    <h4>Selecciona los ingredientes</h4>
+
+    <app-multiple-selector [selected]="selectedIngredients" [noSelected]="noSelectedIngredients" ></app-multiple-selector>
+
+    <div class="buttons-container">
+        <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Guardar</button>
+        <a routerLink="/productos" mat-stroked-button>Cancelar</a>
+    </div>
+</form>

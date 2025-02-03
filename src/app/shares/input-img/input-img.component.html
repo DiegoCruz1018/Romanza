@@ -1,0 +1,14 @@
+<h4>{{title}}</h4>
+
+<div>
+    <button mat-flat-button color="primary" (click)="uploadFile.click()">Seleccionar Imagen</button>
+    <input type="file" hidden #uploadFile accept="image/*" (change)="changeToBase64($event)">
+</div>
+
+<div>
+    @if(imageBase64){
+        <img [src]="imageBase64" width="200px" height="200px">
+    }@else{
+        <img [src]="urlCurrentImage" width="200px" height="200px">
+    }
+</div>

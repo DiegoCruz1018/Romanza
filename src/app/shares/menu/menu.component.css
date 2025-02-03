@@ -1,0 +1,4 @@
+mat-toolbar nav{
+    display: flex;
+    gap: 2rem;
+}

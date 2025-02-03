@@ -1,0 +1,21 @@
+@if(!list){
+    <div #loading>
+        <ng-content select="[loading]"></ng-content>
+    </div>
+
+    @if(!loading.innerHTML.trim()){
+        <img src="img/loading.gif" alt="Imagen cargando">
+    }
+}@else if(list == 0) {
+    <div #void>
+        <ng-content select="[vacio]"></ng-content>
+    </div>
+
+    @if(!void.innerHTML.trim()){
+        <div>
+            <p>No hay elementos para mostrar</p>
+        </div>
+    }
+}@else{
+    <ng-content select="[container]" ></ng-content>
+}

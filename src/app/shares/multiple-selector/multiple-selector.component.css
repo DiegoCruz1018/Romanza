@@ -1,0 +1,43 @@
+.container-multiple-selector{
+    display: flex;
+    justify-content: center;
+}
+
+ul{
+    height: 15rem;
+    overflow-y: auto;
+    list-style: none;
+    width: 17rem;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: .3rem;
+}
+
+ul li{
+    cursor: pointer;
+    padding: .2rem .4rem;
+    border: 1px solid #eee;
+    font-size: 12px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    ul li {
+        font-size: 14px;
+    }
+}
+
+ul li:hover{
+    background-color: rgb(227, 228, 227);
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .5rem;
+}
+
+button{
+    margin: .5rem;
+}
