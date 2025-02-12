@@ -1,7 +1,7 @@
 <div class="container-multiple-selector">
     <ul>
         @for(element of noSelected; track $index){
-            <li (click)="select(element, $index)" >{{element}}</li>
+            <li (click)="select(element, $index)" >{{element.value}}</li>
         }
     </ul>
 
@@ -12,7 +12,7 @@
 
     <ul>
         @for(element of selected; track $index){
-            <li (click)="deselect(element, $index)" >{{element}}</li>
+            <li (click)="deselect(element, $index)" >{{element.value}}</li>
         }
     </ul>
 </div>

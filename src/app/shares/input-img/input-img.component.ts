@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { toBase64 } from '../functions/toBase64';
 
@@ -15,6 +15,9 @@ export class InputImgComponent {
 
   @Input()
   urlCurrentImage?: string;
+
+  @Output()
+  fileSelected = new EventEmitter<File>();
 
   //Es para que se muestre en pantalla la imagen que seleccionamos
   //Puede ser nulo porque podemos no tener una imagen seleccionada
@@ -76,6 +79,9 @@ export class InputImgComponent {
       //Convertir a base64
       toBase64(file).then((value: string) => this.imageBase64 = value)
       .catch(error => console.log(error));
+
+      //Emite el objeto file cuando el formulario es enviado exitosamente
+      this.fileSelected.emit(file);
 
       //Si el usuario selecciona una nueva imagen pues se elimine la UrlImagenActual
       this.urlCurrentImage = undefined;

@@ -5,7 +5,7 @@ export interface IngredientBase {
 }
 
 export interface IngredientDTO extends IngredientBase{
-    id: string;
+    id: number;
 }
 
 export interface CreationIngredientDTO extends IngredientBase{

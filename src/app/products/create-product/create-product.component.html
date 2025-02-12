@@ -3,6 +3,12 @@
 
         <h2>Crear Producto</h2>
 
-        <app-form-products></app-form-products>
+        <app-show-errors [errors]="errors" ></app-show-errors>
+
+        <app-form-products
+        [noSelectedIngredients]="noSelectedIngredients"
+        [selectedIngredients]="selectedIngredients"
+        (postForm)="save($event)"
+        ></app-form-products>
     </div>
 </div>

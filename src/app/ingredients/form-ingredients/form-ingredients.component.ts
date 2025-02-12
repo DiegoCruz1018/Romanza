@@ -5,7 +5,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterLink } from '@angular/router';
-import { extractErrors } from '../../shares/functions/extractErrors';
 import { CreationIngredientDTO, IngredientDTO } from '../ingredient';
 
 @Component({
@@ -47,8 +46,8 @@ export class FormIngredientsComponent implements OnInit{
       return 'El nombre del ingrediente es obligatorio';
     }
 
-    if(name.hasError('maxLength')){
-      return `El nombre no puede tener más de ${name.getError('maxLength').requiredLength} caracteres`;
+    if(name.hasError('maxlength')){
+      return `El nombre no puede tener más de ${name.getError('maxlength').requiredLength} caracteres`;
     }
 
     if(name.hasError('firstLetterUpperCase')){
@@ -67,7 +66,7 @@ export class FormIngredientsComponent implements OnInit{
     }
 
     if(price.hasError('min')){
-      return 'El precio no puede ser menor que cero';
+      return `El precio no puede ser menor que ${price.getError('min').min}`;
     }
 
     if(price.hasError('priceMustNotBeLessThanZero')){

@@ -1,7 +1,7 @@
 <h4>{{title}}</h4>
 
 <div>
-    <button mat-flat-button color="primary" (click)="uploadFile.click()">Seleccionar Imagen</button>
+    <button type="button" mat-flat-button color="primary" (click)="uploadFile.click()">Seleccionar Imagen</button>
     <input type="file" hidden #uploadFile accept="image/*" (change)="changeToBase64($event)">
 </div>
 

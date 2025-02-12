@@ -23,20 +23,18 @@ export function firstLetterUpperCase(): ValidatorFn{
     }
 }
 
-export function priceMustNotBeLessThanZero(): ValidatorFn{
-    return(control: AbstractControl): ValidationErrors | null => {
+export function priceMustNotBeLessThanZero(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
         const priceSelected = <number>control.value;
-
-        if(!priceSelected) return null;
-
-        if(priceSelected <= 0){
+    
+        if (priceSelected <= 0) {
             return {
                 priceMustNotBeLessThanZero: {
                     message: 'El precio no es válido'
                 }
-            }
+            };
         }
-
-        return null;
-    }
-}
+  
+      return null;
+    };
+}  

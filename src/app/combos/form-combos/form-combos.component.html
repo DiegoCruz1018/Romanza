@@ -1,0 +1,19 @@
+<form class="form" (submit)="save()" [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre:</mat-label>
+        <input type="text" matInput [formControl]="form.controls.name">
+        <mat-error>{{getNameErrors()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Precio:</mat-label>
+        <input type="number" matInput [formControl]="form.controls.price">
+        <mat-error>{{getPriceErrors()}}</mat-error>
+    </mat-form-field>
+
+    <div class="buttons-container">
+        <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Guardar</button>
+        <a routerLink="/combos" mat-stroked-button>Cancelar</a>
+
+    </div>
+</form>

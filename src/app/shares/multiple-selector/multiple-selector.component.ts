@@ -1,4 +1,5 @@
 import { Component, Input, input } from '@angular/core';
+import { MultipleSelectorDTO } from './MultipleSelectorModel';
 
 @Component({
   selector: 'app-multiple-selector',
@@ -9,17 +10,17 @@ import { Component, Input, input } from '@angular/core';
 export class MultipleSelectorComponent {
 
   @Input({required: true})
-  selected!: string[];
+  selected!: MultipleSelectorDTO[];
 
   @Input({required: true})
-  noSelected!: string[];
+  noSelected!: MultipleSelectorDTO[];
 
-  select(element: string, index: number){
+  select(element: MultipleSelectorDTO, index: number){
     this.selected.push(element);
     this.noSelected.splice(index, 1);
   }
 
-  deselect(element: string, index: number){
+  deselect(element: MultipleSelectorDTO, index: number){
     this.noSelected.push(element);
     this.selected.splice(index, 1);
   }

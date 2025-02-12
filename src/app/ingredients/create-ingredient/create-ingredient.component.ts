@@ -5,30 +5,37 @@ import { IngredientService } from '../ingredient.service';
 import { CreationIngredientDTO } from '../ingredient';
 import { extractErrors } from '../../shares/functions/extractErrors';
 import { ShowErrorsComponent } from "../../shares/show-errors/show-errors.component";
+import { CreateEntityComponent } from "../../shares/create-entity/create-entity.component";
+import { SERVICE_CRUD_TOKEN } from '../../shares/providers';
 
 @Component({
   selector: 'app-create-ingredient',
-  imports: [FormIngredientsComponent, ShowErrorsComponent],
+  imports: [CreateEntityComponent],
   templateUrl: './create-ingredient.component.html',
-  styleUrl: './create-ingredient.component.css'
+  styleUrl: './create-ingredient.component.css',
+  providers: [
+    {provide: SERVICE_CRUD_TOKEN, useClass: IngredientService}
+  ]
 })
 export class CreateIngredientComponent {
 
-  private router = inject(Router);
-  private ingredientService = inject(IngredientService);
-  errors: string[] = [];
+  ingredientsForm = FormIngredientsComponent;
 
-  save(ingredient: CreationIngredientDTO){
+  // private router = inject(Router);
+  // private ingredientService = inject(IngredientService);
+  // errors: string[] = [];
 
-    this.ingredientService.create(ingredient).subscribe({
-      next: () =>{
-        this.router.navigate(['/ingredientes']);
-      }, 
-      error: err => {
-        const errors = extractErrors(err);
+  // save(ingredient: CreationIngredientDTO){
 
-        this.errors = errors;
-      }
-    })
-  }
+  //   this.ingredientService.create(ingredient).subscribe({
+  //     next: () =>{
+  //       this.router.navigate(['/ingredientes']);
+  //     }, 
+  //     error: err => {
+  //       const errors = extractErrors(err);
+
+  //       this.errors = errors;
+  //     }
+  //   })
+  // }
 }

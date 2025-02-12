@@ -5,11 +5,12 @@ import { CreationIngredientDTO, IngredientDTO } from './ingredient';
 import { Observable } from 'rxjs';
 import { PaginationDTO } from '../shares/models/PaginationDTO';
 import { buildQueryParams } from '../shares/functions/buildQueryParams';
+import { IServiceCRUD } from '../shares/interfaces/service-crud';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IngredientService {
+export class IngredientService implements IServiceCRUD<IngredientDTO, CreationIngredientDTO>{
 
   private http = inject(HttpClient);
   private urlBase = environment.apiURL + '/ingredientes';
@@ -28,12 +29,12 @@ export class IngredientService {
     return this.http.get<IngredientDTO[]>(this.urlBase, {params: queryParams, observe: 'response'});
   }
 
-  public create(ingredient: CreationIngredientDTO){
-    return this.http.post(this.urlBase, ingredient);
+  public getById(id: number): Observable<IngredientDTO>{
+    return this.http.get<IngredientDTO>(`${this.urlBase}/${id}`);
   }
 
-  public getForId(id: number): Observable<IngredientDTO>{
-    return this.http.get<IngredientDTO>(`${this.urlBase}/${id}`);
+  public create(ingredient: CreationIngredientDTO){
+    return this.http.post(this.urlBase, ingredient);
   }
 
   public update(id: number, ingredient: CreationIngredientDTO){

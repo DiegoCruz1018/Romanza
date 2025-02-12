@@ -50,6 +50,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     background-color: rgb(220, 219, 219);
 }
 
+.img-table-crud{
+    max-width: 8rem; 
+    max-height: 8rem; 
+    margin: .5rem;
+}
+
 /* FORMULARIO */
 .form-container{
     max-width: 700px;

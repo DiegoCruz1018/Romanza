@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="form-container">
+        <h2>Editar Producto</h2>
+
+        @if(noSelectedIngredients || selectedIngredients){
+
+            <app-show-errors [errors]="errors" ></app-show-errors>
+
+            <app-form-products
+                [model]="product"
+                [noSelectedIngredients]="noSelectedIngredients"
+                [selectedIngredients]="selectedIngredients"
+                (postForm)="save($event)"
+            >
+            </app-form-products>
+
+            
+        }@else{
+            <img src="img/loading.gif" alt="Imagen Cargando">
+        }
+    </div>
+</div>
