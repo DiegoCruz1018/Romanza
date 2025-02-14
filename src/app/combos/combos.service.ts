@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { IServiceCRUD } from '../shares/interfaces/service-crud';
-import { ComboDTO, CreationComboDTO } from './combos';
+import { ComboDTO, ComboPostGetDTO, ComboPutGetDTO, CreationComboDTO } from './combos';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginationDTO } from '../shares/models/PaginationDTO';
@@ -28,17 +28,45 @@ export class CombosService implements IServiceCRUD<ComboDTO, CreationComboDTO>{
     return this.http.get<ComboDTO>(`${this.urlBase}/${id}`);
   }
 
-  public create(combo: CreationComboDTO){
-    return this.http.post(this.urlBase, combo);
+  public createGet(): Observable<ComboPostGetDTO>{
+    return this.http.get<ComboPostGetDTO>(`${this.urlBase}/postget`);
+  }
+
+  public create(combo: CreationComboDTO): Observable<ComboDTO>{
+    
+    const formData = this.buildFormData(combo);
+
+    return this.http.post<ComboDTO>(this.urlBase, formData);
+  }
+
+  public updateGet(id: number): Observable<ComboPutGetDTO>{
+    return this.http.get<ComboPutGetDTO>(`${this.urlBase}/putget/${id}`);
   }
 
   public update(id: number, combo: CreationComboDTO){
-    return this.http.put(`${this.urlBase}/${id}`, combo);
+
+    const formData = this.buildFormData(combo);
+
+    return this.http.put(`${this.urlBase}/${id}`, formData);
   }
 
   public delete(id: number): Observable<ComboDTO> {
     return this.http.delete<ComboDTO>(`${this.urlBase}/${id}`);
   }
 
-  
+  private buildFormData(combo: CreationComboDTO){
+    
+    const formData = new FormData();
+
+    formData.append('name', combo.name);
+    formData.append('price', combo.price.toString());
+
+    if(combo.image){
+      formData.append('image', combo.image);
+    }
+
+    formData.append('productsIds', JSON.stringify(combo.productsIds));
+
+    return formData;
+  }  
 }

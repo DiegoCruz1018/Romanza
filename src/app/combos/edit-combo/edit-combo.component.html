@@ -1,7 +1,13 @@
-<app-edit-entity
-    title="Editar Combo"
-    indexRoute="/combos"
-    [form]="comboForm"
-    [id]="id"
->
-</app-edit-entity>
+<div class="container">
+    <div class="form-container">
+        <h2>Editar Combo</h2>
+
+        @if(noSelectedProducts || selectedProducts){
+            <app-show-errors [errors]="errors"></app-show-errors>
+
+            <app-from-combos [noSelectedProducts]="noSelectedProducts" [selectedProducts]="selectedProducts" [model]="combo" (postForm)="save($event)" ></app-from-combos>
+        }@else {
+            <img src="img/loading.gif" alt="Imagen Cargando">
+        }
+    </div>
+</div>

@@ -44,6 +44,10 @@ export class ProductService {
     return this.http.put(`${this.urlBase}/${id}`, formData);
   }
 
+  public delete(id: number): Observable<ProductDTO>{
+    return this.http.delete<ProductDTO>(`${this.urlBase}/${id}`);
+  }
+
   private buildFormData(product: CreationProductDTO): FormData{
    
     const formData = new FormData();

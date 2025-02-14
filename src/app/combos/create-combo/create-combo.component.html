@@ -1,6 +1,9 @@
-<app-create-entity
-    title="Crear Combo"
-    indexRoute="/combos"
-    [form]="comboForm"
->
-</app-create-entity>
+<div class="container">
+    <div class="form-container">
+        <h2>Crear Combo</h2>
+
+        <app-show-errors [errors]="errors" ></app-show-errors>
+
+        <app-from-combos [noSelectedProducts]="noSelectedProducts" [selectedProducts]="selectedProducts" (postForm)="save($event)"></app-from-combos>
+    </div>
+</div>

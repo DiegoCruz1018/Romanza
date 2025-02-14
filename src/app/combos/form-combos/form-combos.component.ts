@@ -5,10 +5,13 @@ import { firstLetterUpperCase, priceMustNotBeLessThanZero } from '../../shares/f
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { MultipleSelectorComponent } from "../../shares/multiple-selector/multiple-selector.component";
+import { MultipleSelectorDTO } from '../../shares/multiple-selector/MultipleSelectorModel';
+import { InputImgComponent } from "../../shares/input-img/input-img.component";
 
 @Component({
   selector: 'app-from-combos',
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink],
+  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink, MultipleSelectorComponent, InputImgComponent],
   templateUrl: './form-combos.component.html',
   styleUrl: './form-combos.component.css'
 })
@@ -20,8 +23,14 @@ export class FormCombosComponent implements OnInit{
     }
   }
 
-  @Input({required: true})
+  @Input()
   model: ComboDTO | undefined;
+
+  @Input({required: true})
+  noSelectedProducts!: MultipleSelectorDTO[];
+
+  @Input({required: true})
+  selectedProducts!: MultipleSelectorDTO[];
 
   @Output()
   postForm = new EventEmitter<CreationComboDTO>();
@@ -31,6 +40,7 @@ export class FormCombosComponent implements OnInit{
   form = this.formBuilder.group({
     name: ['', {validators: [Validators.required, Validators.maxLength(20), firstLetterUpperCase()]}],
     price: new FormControl<number | null | string>(null, {validators: [Validators.required, Validators.min(1), priceMustNotBeLessThanZero()]}),
+    image: new FormControl<File | null | string>(null),
     dateCreated: [new Date()]
   });
 
@@ -71,12 +81,20 @@ export class FormCombosComponent implements OnInit{
     return "";
   }
 
+  fileSelected(file: File){
+    this.form.controls.image.setValue(file);
+  }
+
   save(){
     if(!this.form.valid){
       return;
     }
 
     const combo = this.form.value as CreationComboDTO;
+
+    //Hacer un arreglo de enteros o números
+    const productsIds = this.selectedProducts.map(val => val.key);
+    combo.productsIds = productsIds;
 
     this.postForm.emit(combo);
   }

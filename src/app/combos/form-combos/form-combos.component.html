@@ -11,9 +11,12 @@
         <mat-error>{{getPriceErrors()}}</mat-error>
     </mat-form-field>
 
+    <app-input-img title="Imagen del combo" [urlCurrentImage]="model?.image" (fileSelected)="fileSelected($event)" ></app-input-img>
+
+    <app-multiple-selector [noSelected]="noSelectedProducts" [selected]="selectedProducts"></app-multiple-selector>
+
     <div class="buttons-container">
         <button type="submit" mat-flat-button color="primary" [disabled]="form.invalid">Guardar</button>
         <a routerLink="/combos" mat-stroked-button>Cancelar</a>
-
     </div>
 </form>

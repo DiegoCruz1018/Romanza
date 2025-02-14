@@ -47,7 +47,10 @@ export class IndexProductsComponent implements OnInit{
   }
 
   delete(id: number){
-    
+    this.productService.delete(id).subscribe(() => {
+      this.pagination.page = 1;
+      this.uploadRecords();
+    });
   }
 
   firstLetterUpperCase(value: string){
