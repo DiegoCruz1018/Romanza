@@ -28,7 +28,7 @@ export class EditEntityComponent<TDTO, TCreationDTO> implements OnInit{
   }
 
   @Input({required: true})
-  id!: number;
+  id!: number | string;
 
   @Input({required: true})
   title!: string;

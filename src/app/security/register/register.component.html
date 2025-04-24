@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="form-container">
+        <h2>Crear Usuario</h2>
+
+        <app-show-errors [errors]="errors"></app-show-errors>
+
+        <app-form-authentication [selectedRoles]="selectedRoles" [noSelectedRoles]="noSelectedRoles" (postForm)="register($event)"></app-form-authentication>
+    </div>
+</div>

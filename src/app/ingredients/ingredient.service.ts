@@ -17,6 +17,10 @@ export class IngredientService implements IServiceCRUD<IngredientDTO, CreationIn
 
   constructor() { }
 
+  public getAll(): Observable<HttpResponse<IngredientDTO[]>>{
+    return this.http.get<IngredientDTO[]>(`${this.urlBase}/all`, {observe: 'response'});
+  }
+
   public get(pagination: PaginationDTO): Observable<HttpResponse<IngredientDTO[]>>{
     
     //Llama a la función buildQueryParams para convertir el objeto de paginación

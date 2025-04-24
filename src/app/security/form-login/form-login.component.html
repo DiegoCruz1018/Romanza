@@ -1,0 +1,25 @@
+<form class="form-login" (submit)="save()" [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>Email:</mat-label>
+        <input type="email" matInput [formControl]="form.controls.email">
+        <mat-error>{{getEmailErrors()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Password:</mat-label>
+        <input type="password" matInput [formControl]="form.controls.password" [type]="hide() ? 'password' : 'text'">
+        <button
+            type="button"
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+        >
+        <mat-icon class="visbility-icon">{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+        <mat-error>{{getPasswordErrors()}}</mat-error>
+    </mat-form-field>
+
+    <button type="submit" class="login-button button-green">Iniciar Sesión</button> 
+</form>

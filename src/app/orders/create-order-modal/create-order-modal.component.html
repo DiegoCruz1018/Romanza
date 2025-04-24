@@ -1,0 +1,10 @@
+<div class="modal">
+    <div class="container-button">
+        <button (click)="close()" mat-button><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="container">
+        <h2>Orden</h2>
+        <app-show-errors [errors]="errors" ></app-show-errors>
+        <app-form-order [model]="data.order" [products]="products" [combos]="combos" (postForm)="save($event)"></app-form-order>
+    </div>
+</div>

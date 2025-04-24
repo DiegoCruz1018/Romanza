@@ -1,0 +1,20 @@
+.order-container-body__product__info .button{
+    margin-top: 0.5rem;
+}
+
+.buttons-container{
+    margin-top: 0;
+}
+
+.order-container-body__product__info p{
+    font-weight: bold;
+}
+
+.container-total{
+    display: flex;
+    justify-content: end;
+    margin: 0;
+}
+.container-total span{
+    color: rgb(2,119,2);
+}

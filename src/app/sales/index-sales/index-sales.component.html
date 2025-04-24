@@ -1,0 +1,75 @@
+<h2>Ventas</h2>
+
+<!-- GRÁFICA DE VENTAS -->
+<div class="chart-container">
+    <canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="barChartType"
+    >
+    </canvas>
+</div>
+
+<div class="date-filter-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Desde</mat-label>
+      <input matInput [matDatepicker]="picker1" [(ngModel)]="start" name="startDate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Hasta</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="end" name="endDate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <button (click)="getSales()" class="button button-green">Filtrar ventas</button>
+</div>
+
+
+<app-list-generic [list]="sales">   
+    <ng-container container>
+        <div class="table-crud">
+            <table mat-table [dataSource]="sales" class="mat-elevation-z8">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>Id</th>
+                    <td mat-cell *matCellDef="let sale">{{sale.id}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="user">
+                    <th mat-header-cell *matHeaderCellDef>Vendedor</th>
+                    <td mat-cell *matCellDef="let sale">{{getUserValue(sale.userId, 'name')}} {{getUserValue(sale.userId, 'lastname')}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="client">
+                    <th mat-header-cell *matHeaderCellDef>Cliente</th>
+                    <td mat-cell *matCellDef="let sale">{{sale.clientName}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="detalles">
+                    <th mat-header-cell *matHeaderCellDef>Detalles</th>
+                    <td mat-cell *matCellDef="let sale">{{sale.orderDetails.length}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef>Total</th>
+                    <td mat-cell *matCellDef="let sale">{{formatPrice(sale.total)}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                    <td mat-cell *matCellDef="let sale">{{formatDate(sale.dateCreated)}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnsToShow"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnsToShow"></tr>
+            </table>
+        </div>
+    </ng-container>
+</app-list-generic>
+
+<div class="total-sales">
+    <h3>Venta Total: <span>{{formatPrice(totalSales)}}</span></h3>
+</div>

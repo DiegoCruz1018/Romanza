@@ -38,3 +38,10 @@ export function priceMustNotBeLessThanZero(): ValidatorFn {
       return null;
     };
 }  
+
+export function formatPrice(price: number): string {
+    return new Intl.NumberFormat('es-MX', {
+      style: 'currency',
+      currency: 'MXN',
+    }).format(price);
+}

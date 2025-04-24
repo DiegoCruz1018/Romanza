@@ -1,0 +1,154 @@
+<h2>Órdenes</h2>
+
+@if(hasPermission('Crear Orden')){
+    <a routerLink="/ordenes/crear" class="a-index button-icon button-green"><mat-icon>add</mat-icon>Crear Orden</a>
+}
+
+<div class="filter-container">
+    <mat-form-field appearance="outline">
+        <mat-label>Filtrar Órdenes</mat-label>
+        <mat-select [(value)]="filter" (selectionChange)="getOrders()">
+            <mat-option value="hoy">Hoy</mat-option>
+            <mat-option value="ayer">Ayer</mat-option>
+            <mat-option value="todas">Todas</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div class="orders-container">
+
+   @if(orders && orders.length > 0){
+    @for (order of orders; track $index) {
+        <div class="order-container">
+
+            <div class="order-container-header">
+
+                <div class="order-container-header__info">
+                    <h3>Orden {{$index + 1}}</h3>
+                </div>
+
+                @if(getStatusValue(order.statusId, 'name') !== 'Entregado'){
+                    <div class="table-buttons">
+                        
+                        @if(hasPermission('Editar Orden')){
+                            <a routerLink="{{'/ordenes/crear/' + order.id}}" class="button-mat-icon button-blue"><mat-icon>edit</mat-icon></a>
+                        }
+
+                        @if(hasPermission('Eliminar Orden')){
+                            <button class="button-mat-icon button-red" (click)="deleteOrder(order.id)"><mat-icon>delete</mat-icon></button>
+                        }
+                    </div>
+                }@else {
+                    <div class="table-buttons">
+                        @if(hasPermission('Eliminar Orden')){
+                            <button class="button-mat-icon button-red" (click)="deleteOrder(order.id)"><mat-icon>delete</mat-icon></button>
+                        }
+                    </div>
+                }
+
+            </div> <!-- order-container-header -->
+
+            <mat-divider></mat-divider>
+
+            <div class="order-container-client-info">
+                <p>Cliente: <span>{{order.clientName}}</span></p>
+                <p>Teléfono: <span>{{order.clientPhoneNumber}}</span></p>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <h3 class="title-pedido">Pedido:</h3>
+
+            <div class="order-container-body">
+
+                @for (item of order.orderDetails; track $index){
+
+                    <!-- @if(item.itemType.toLowerCase() == 'product'){
+                        <h3>{{getProductValue(item.itemId, 'name')}}</h3>
+                    }@else if(item.itemType.toLowerCase() == 'combo'){
+                        <h3>{{getComboValue(item.itemId, 'name')}}</h3>
+                    } -->
+
+                    <div class="order-container-body__product">
+
+                        @if(item.itemType.toLowerCase() == 'product'){
+                            <div class="order-container-body__product__img">
+                                <!-- <img src="/img/imgProducts/pizzaAlemana.jpg" alt="img-product"> -->
+                                <img [src]="getProductValue(item.itemId, 'image')" alt="img-product">
+                            </div>
+                        }@else if(item.itemType.toLowerCase() == 'combo'){
+                            <div class="order-container-body__product__img img-combo">
+                                <img [src]="getComboValue(item.itemId, 'image')" alt="img-combo">
+                            </div>
+                        }
+
+                        <div class="order-container-body__product__info">
+
+                            @if(item.itemType.toLowerCase() == 'product'){
+                                <h3>{{getProductValue(item.itemId, 'name')}}</h3>
+                                <p>Precio: <span>${{getProductValue(item.itemId, 'price')}}</span></p>
+                            }@else if(item.itemType.toLowerCase() == 'combo'){
+                                <h3>{{getComboValue(item.itemId, 'name')}}</h3>
+                                <p>Precio: <span>{{formatPrice(+getComboValue(item.itemId, 'price'))}}</span></p>
+                            }
+
+                            @if(item.orderDetailsIngredients.length > 0){
+                                <div class="order-container-body__product__info__extra">
+                                    <h4>Extra</h4>
+                                    <ol>
+                                        @for(ingredient of item.orderDetailsIngredients; track $index){
+                                            @if(ingredient.ingredientId){
+                                                <li>
+                                                    {{ getIngredientValue(ingredient.ingredientId, 'name') }}
+                                                    -
+                                                    <span>{{ formatPrice(+getIngredientValue(ingredient.ingredientId, 'price')) }}</span>
+                                                </li>
+                                            }
+                                        }
+                                    </ol>
+                                </div>
+                            }
+
+                        </div> <!-- order-container-body__product__info -->
+
+                    </div> <!-- order-container-body__product -->
+
+                    <!-- Condición para mostrar el mat-divider solo si no es el último elemento -->
+
+                    @if(!$last){
+                        <mat-divider></mat-divider>
+                    }
+                }
+
+            </div> <!-- order-container-body -->
+
+            <mat-divider></mat-divider>
+
+            <div class="order-container-footer">
+
+                @if(getStatusValue(order.statusId, 'name') !== 'Entregado'){
+                    <p class="status-yellow">{{getStatusValue(order.statusId, 'name')}}</p>
+                }
+
+                <p></p>
+
+                <h3>Total: <span>{{formatPrice(order.total)}}</span></h3>
+            </div>
+
+            <div class="order-container-button">
+                @if(getStatusValue(order.statusId, 'name') !== 'Entregado'){
+                    <button class="button-inline button-green" (click)="orderDelivered(order.id)" [disabled]="getStatusValue(order.statusId, 'name') === 'Entregado'">Entregado</button>
+                }@else{
+                    <p class="status-green">{{getStatusValue(order.statusId, 'name')}}</p>
+                }
+            </div>
+
+        </div> <!-- order-container -->
+    }
+   }@else {
+    <div class="order-container-empty">
+        <h3>No hay órdenes</h3>
+    </div>
+   }
+
+</div> <!-- orders-container -->

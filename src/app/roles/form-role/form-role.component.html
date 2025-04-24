@@ -1,0 +1,14 @@
+<form class="form" (submit)="save()" [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre:</mat-label>
+        <input type="text" matInput [formControl]="form.controls.name">
+        <mat-error>{{getNameErrors()}}</mat-error>
+    </mat-form-field>
+
+    <app-multiple-selector [noSelected]="noSelectedPermissions" [selected]="selectedPermissions" ></app-multiple-selector>
+
+    <div class="buttons-container">
+        <button type="submit" class="button button-green">Guardar</button>
+        <a routerLink="/roles" class="button button-red">Cancelar</a>
+    </div>
+</form>

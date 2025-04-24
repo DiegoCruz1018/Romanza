@@ -16,6 +16,10 @@ export class CombosService implements IServiceCRUD<ComboDTO, CreationComboDTO>{
 
   private http = inject(HttpClient);
   private urlBase = environment.apiURL + '/combos';
+
+  public getAll(): Observable<HttpResponse<ComboDTO[]>> {
+    return this.http.get<ComboDTO[]>(`${this.urlBase}/all`,  {observe: 'response'});
+  }
   
   public get(pagination: PaginationDTO): Observable<HttpResponse<ComboDTO[]>> {
 

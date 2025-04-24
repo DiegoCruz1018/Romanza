@@ -18,9 +18,9 @@ export class CreateProductComponent {
   selectedIngredients: MultipleSelectorDTO[] = [];
   noSelectedIngredients: MultipleSelectorDTO[] = [];
 
-  productService = inject(ProductService);
+  private productService = inject(ProductService);
 
-  router = inject(Router);
+  private router = inject(Router);
 
   errors: string[] = [];
 

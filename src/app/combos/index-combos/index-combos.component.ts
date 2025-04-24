@@ -1,6 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { IndexEntityComponent } from "../../shares/index-entity/index-entity.component";
-import { SERVICE_CRUD_TOKEN } from '../../shares/providers';
 import { CombosService } from '../combos.service';
 import { ListGenericComponent } from "../../shares/list-generic/list-generic.component";
 import { Router, RouterLink } from '@angular/router';
@@ -11,10 +9,14 @@ import { ComboDTO } from '../combos';
 import { PaginationDTO } from '../../shares/models/PaginationDTO';
 import { HttpResponse } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { AuthorizedComponent } from "../../security/authorized/authorized.component";
+import Swal from 'sweetalert2';
+import { SecurityService } from '../../security/security.service';
 
 @Component({
   selector: 'app-index-combos',
-  imports: [ListGenericComponent, RouterLink, MatButtonModule, MatPaginatorModule, SweetAlert2Module, MatTableModule],
+  imports: [ListGenericComponent, RouterLink, MatButtonModule, MatPaginatorModule, SweetAlert2Module, MatTableModule, MatIconModule, AuthorizedComponent],
   templateUrl: './index-combos.component.html',
   styleUrl: './index-combos.component.css',
 })
@@ -22,16 +24,29 @@ export class IndexCombosComponent implements OnInit{
 
   ngOnInit(): void {
     this.uploadRecords();
+    this.fillColumnsToShow();
   }
-
-  columnsToShow = ['id', 'image','name', 'price', 'acciones'];
 
   combos!: ComboDTO[];
   pagination: PaginationDTO = {page: 1, recordsPerPage: 5};
   quantityTotalRecords!: number;
+  
+  columnsToShow: string[]= [];
 
   private combosService = inject(CombosService);
-  private router = inject(Router);
+  private securityService = inject(SecurityService);
+
+  hasPermission(permission: string): boolean{
+    return this.securityService.hasPermission(permission);
+  }
+
+  fillColumnsToShow(){
+    if(this.securityService.getFieldJWT('Administrador') || this.hasPermission('Editar Combo') || this.hasPermission('Eliminar Combo')){
+      this.columnsToShow = ['id', 'image', 'name', 'price', 'acciones'];
+    }else{
+      this.columnsToShow = ['id', 'image', 'name', 'price'];
+    }
+  }
 
   uploadRecords(){
     this.combosService.get(this.pagination).subscribe((response: HttpResponse<ComboDTO[]>) => {
@@ -47,10 +62,23 @@ export class IndexCombosComponent implements OnInit{
   }
 
   delete(id: number){
-    this.combosService.delete(id).subscribe(() => {
-      this.pagination.page = 1;
-      this.uploadRecords();
-    })
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esta acción",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#027702',
+      cancelButtonColor: '#D70505',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.combosService.delete(id).subscribe(() => {
+          this.pagination.page = 1;
+          this.uploadRecords();
+        });
+      }
+    });
   }
 
   firstLetterUpperCase(value: string){
