@@ -4,7 +4,9 @@
     </div>
 
     @if(!loading.innerHTML.trim()){
-        <img src="img/loading.gif" alt="Imagen cargando">
+        <div class="container-img-locading">
+            <img class="img-loading" src="img/loading.gif" alt="Imagen cargando">
+        </div>
     }
 }@else if(list == 0) {
     <div #void>

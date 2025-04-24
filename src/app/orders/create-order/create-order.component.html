@@ -1,0 +1,39 @@
+<div class="container-items">
+
+    <div class="container-button-order">
+        <button class="button button-blue" (click)="openOrderModal()">Ver Orden</button>
+    </div>
+
+    @if(products || combos){
+
+        <h2>Combos</h2>
+
+        <div class="container-combos">
+            @for(combo of combos; track $index){
+                <div class="container-item">
+                    <img [src]="getComboValue(combo.id, 'image')" alt="img-product">
+                    <h3>{{getComboValue(combo.id, 'name')}}</h3>
+                    <p>{{formatPrice(+getComboValue(combo.id, 'price'))}}</p>
+            
+                    <button (click)="addItemToOrder(combo.id, 'Combo')" class="button-inline button-green">Agregar</button>
+                </div>
+            }
+        </div>
+
+        <h2>Productos</h2>
+        
+        <div class="container-products">
+            @for(product of products; track $index){
+                <div class="container-item">
+                    <img [src]="getProductValue(product.id, 'image')" alt="img-product">
+                    <h3>{{getProductValue(product.id, 'name')}}</h3>
+                    <p>{{formatPrice(+getProductValue(product.id, 'price'))}}</p>
+        
+                    <button (click)="addItemToOrder(product.id, 'Product')" class="button-inline button-green">Agregar</button>
+                </div>
+            }
+        </div>
+    }@else {
+        <p>No hay registros para mostrar</p>
+    }
+</div>

@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="login-container">
+        <div class="img-login">
+            <img src="img/logo.jpeg" alt="Imagen Login">
+        </div>
+
+        <div class="login">
+            <h1>Inicia Sesión</h1>
+
+            <app-show-errors [errors]="errors"></app-show-errors>
+
+            <app-form-login (postForm)="login($event)"></app-form-login>
+        </div>
+    </div>
+</div>

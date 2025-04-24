@@ -1,6 +1,8 @@
 <h2>{{title}}</h2>
 
-<a routerLink="{{routeCreate}}" mat-flat-button color="primary" class="a-index">Crear {{title}}</a>
+@if(hasPermission(getCreatePermission())){
+    <a routerLink="{{routeCreate}}" class="a-index button-icon button-green"><mat-icon>add</mat-icon>Crear {{title}}</a>
+}
 
 <app-list-generic [list]="entities">
     <ng-container container>
@@ -11,17 +13,26 @@
                         <ng-container matColumnDef="acciones">
                             <th mat-header-cell *matHeaderCellDef>Acciones</th>
                             <td mat-cell *matCellDef="let element">
-                                <div class="table-buttons">
-                                    <a mat-flat-button color="primary" routerLink="{{routeEdit + '/' + element.id}}">Editar</a>
-                                    <button
-                                        mat-stroked-button
-                                        color="warn"
-                                        [swal]="{title: 'Confirmacion', text: '¿Deseas eliminar este registro?', showCancelButton: true}"
-                                        (confirm)="delete(element.id)"
-                                    >
-                                    Eliminar
-                                    </button>
-                                </div>
+                                <app-authorized rol="admin">
+                                    <ng-container authorized>
+                                        <div class="table-buttons">
+                                            
+                                            @if(hasPermission(getEditPermission())){
+                                                <a routerLink="{{routeEdit + '/' + element.id}}" class="button-mat-icon button-blue"><mat-icon>edit</mat-icon></a>
+                                            }
+
+                                            @if(hasPermission(getDeletePermission())){
+                                                <button
+                                                    type="button"
+                                                    (click)="delete(element.id)"
+                                                    class="button-mat-icon button-red"
+                                                >
+                                                <mat-icon>delete</mat-icon>
+                                                </button>
+                                            }
+                                        </div>
+                                    </ng-container>
+                                </app-authorized>
                             </td>
                         </ng-container>
                     }@else{

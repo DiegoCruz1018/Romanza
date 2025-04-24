@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="form-container">
+        <h2>Crear Rol</h2>
+
+        <app-show-errors [errors]="errors"></app-show-errors>
+
+        <app-form-role
+            [noSelectedPermissions]="noSelectedPermissions"
+            [selectedPermissions]="selectedPermissions"
+            (postForm)="save($event)"
+        >
+        </app-form-role>
+    </div>
+</div>

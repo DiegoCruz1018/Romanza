@@ -1,20 +1,124 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: rgb(239, 245, 248);}
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    /* background-color: rgb(239, 245, 248); */
+    background: rgb(2,119,2);
+    background: linear-gradient(205deg, rgba(2,119,2, .2) 30%, rgba(255,255,255, .2) 50%, rgba(215,5,5, .2) 65%);
+}
 
 .container{
     margin: 0 2rem;
     padding-bottom: 1rem;
 }
 
+.container-img-locading{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.img-loading{
+    max-height: 100rem;
+    max-width: 120rem;
+}
+
 .a-index{
     margin-bottom: 2rem;
+}
+.a-index mat-icon{
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+/* Quitar barra de scroll */
+::-webkit-scrollbar {
+    display: none;
+}
+
+.buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.button-inline{
+    display: inline-block;
+    width: 100%;
+    padding: 1rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.button, .button-icon{
+    all: unset;
+    padding: .5rem .7rem;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: .5rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.button-icon{
+    display: inline-flex;
+    max-width: auto;
+    align-items: center;
+    gap: .5rem;
+}
+
+.button-icon mat-icon{
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.button-mat-icon{
+    all: unset;
+    padding: .5rem .7rem;
+    border-radius: .5rem;
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.button-green {
+    background-color: rgb(2, 119, 2);
+    transition: background-color 0.3s ease; /* Aplica una transición de color suave */
+}
+
+.button-blue {
+    background-color: rgb(8, 8, 190);
+    transition: background-color 0.3s ease; /* Aplica una transición de color suave */
+}
+
+.button-red {
+    background-color: rgb(215, 5, 5);
+    transition: background-color 0.3s ease; /* Aplica una transición de color suave */
+}
+
+.button:hover, .button-icon:hover, .button-mat-icon:hover, .button-inline{
+    cursor: pointer;
+    filter: brightness(96%); /* Oscurece solo el fondo al 85% */
 }
 
 /* SOMBRA */
 .table-crud, .form-container{
     border-radius: 1rem;
+    margin-top: 2rem;
     webkit-box-shadow: -5px 9px 5px 0px rgba(0,0,0,0.22);
     -moz-box-shadow: -5px 9px 5px 0px rgba(0,0,0,0.22);
     box-shadow: -5px 9px 5px 0px rgba(0,0,0,0.22);
@@ -40,14 +144,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     gap: .5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
     .table-buttons{
         flex-direction: row;
     }
 }
 
 .table-crud tr:nth-child(even){
-    background-color: rgb(220, 219, 219);
+    background-color: #e3e7ec;
 }
 
 .img-table-crud{
@@ -64,30 +168,101 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     padding: 2rem;
 }
 
-.form{
+.form, .form-login{
     max-width: 700px;
 }
 
-.form mat-form-field{
+.form mat-form-field, .form-login mat-form-field{
     display: block;
     margin-bottom: 1rem;
 }
 
-.form .buttons-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.form mat-error{
+.form mat-error, .form-login mat-error{
     margin: .2rem -1rem;
     padding-bottom: .2rem;
     text-align: center;
-    background-color: rgb(227, 72, 72);
+    background-color: rgb(215, 5, 5);
     color: white;
     font-weight: bold;
     text-transform: uppercase;
     border-radius: .2rem;
+}
+
+
+/* mat-icon{
+    color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+} */
+
+
+.order-container-body{
+    margin: 1rem;
+}
+.order-container-body__product{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+.order-container-body__product__img img{
+    max-width: 9rem;
+    max-height: 9rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+.img-combo img{
+    border-radius: 0.5rem;
+}
+.order-container-body__product__info h3{
+    color: rgb(2,119,2);
+    margin: 0;
+}
+.order-container-body__product__info p{
+    margin-top: 0.5rem;
+}
+.order-container-body__product__info__item{
+    display: flex;
+    gap: 2rem;
+}
+.order-container-body__product__info__item button, .order-container-body__product__info__extra button{
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    cursor: pointer;
+}
+.order-container-body__product__info__extra h4{
+    margin: 0 0 0.5rem 0;
+}
+.order-container-body__product__info__extra ol{
+    margin: 0;
+}
+.ingredient-container{
+    display: flex;
+    align-items: center;
+}
+.ingredient-container button mat-icon{
+    font-size: 1.2rem;
+    vertical-align: top; /* Asegura un mejor alineado con el texto */
+}
+.ingredient-container span{
+    color: rgb(2, 119, 2);
+    font-weight: bold;
+}
+@media (min-width: 768px) {
+    .order-container-body__product{
+        gap: 2rem;
+    }
+}
+
+.filter-container{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.filter-container mat-form-field{
+    width: 100%;
+    max-width: 30rem;
+    background-color: white;
 }

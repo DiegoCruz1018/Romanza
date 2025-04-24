@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { PaginationDTO } from '../shares/models/PaginationDTO';
 import { environment } from '../../environments/environment.development';
 import { buildQueryParams } from '../shares/functions/buildQueryParams';
+import { RoleDTO } from '../roles/roles';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,11 @@ export class StatusService implements IServiceCRUD<StatusDTO, CreationStatusDTO>
 
   constructor() { }
 
-  public get(pagination: PaginationDTO): Observable<HttpResponse<StatusDTO[]>> {
+  public getAll(): Observable<HttpResponse<StatusDTO[]>> {
+    return this.http.get<StatusDTO[]>(`${this.urlBase}/all`, {observe: 'response'});
+  }
+
+  public get(pagination: PaginationDTO): Observable<HttpResponse<RoleDTO[]>> {
 
     let queryParams = buildQueryParams(pagination);
 

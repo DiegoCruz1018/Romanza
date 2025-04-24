@@ -1,8 +1,100 @@
-<mat-toolbar>
+<!-- <mat-toolbar>
     <nav>
         <a routerLink="productos" mat-flat-button color="primary">Productos</a>
         <a routerLink="ingredientes" mat-flat-button color="primary">Ingredientes</a>
         <a routerLink="status" mat-flat-button color="primary">Status</a>
         <a routerLink="combos" mat-flat-button color="primary">Combos</a>
     </nav>
-</mat-toolbar>
+</mat-toolbar> -->
+
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="isSidenavOpen" class="sidenav" >
+        <!-- <mat-toolbar>
+            <button mat-icon-button (click)="toogleSidenav()"></button>
+            <mat-icon>close</mat-icon>
+        </mat-toolbar> -->
+        <mat-toolbar>
+            <!-- <h1><a href="">ROMANZA</a></h1> -->
+            <div class="logo">
+                <a routerLink="/dashboard"><img class="logo-img" src="img/logo.jpeg" alt="Logo Image"></a>
+            </div>
+        </mat-toolbar>
+        <!-- <mat-nav-list>
+            <a mat-list-item routerLink="productos">Productos</a>
+            <a mat-list-item routerLink="combos">Combos</a>
+            <a mat-list-item routerLink="ingredientes">Ingredientes</a>
+            <a mat-list-item routerLink="status">Status</a>
+        </mat-nav-list> -->
+        <app-authorized [role]="['Administrador', 'Usuario']">
+            <ng-container authorized>
+                <ul>
+                    @if(hasPermission('Ver Ventas')){
+                        <a mat-list-item class="menu-a" routerLink="ventas"><mat-icon>paid</mat-icon>Ventas</a>
+                        <mat-divider></mat-divider>
+                    }
+                    @if(hasPermission('Ver Ordenes')){
+                        <a mat-list-item class="menu-a" routerLink="ordenes"><mat-icon>shopping_bag</mat-icon>Órdenes</a>
+                    }
+                    @if(hasPermission('Ver Status')){
+                        <a mat-list-item class="menu-a" routerLink="status"><mat-icon>hourglass_empty</mat-icon> Status</a>
+                    }
+                    <mat-divider></mat-divider>
+                    @if(hasPermission('Ver Productos')){
+                        <a mat-list-item class="menu-a" routerLink="productos"><mat-icon>inventory</mat-icon>Productos</a>
+                    }
+                    @if(hasPermission('Ver Combos')){
+                        <a mat-list-item class="menu-a" routerLink="combos"><mat-icon>redeem</mat-icon>Combos</a>
+                    }
+                    @if(hasPermission('Ver Ingredientes')){
+                        <a mat-list-item class="menu-a" routerLink="ingredientes"><mat-icon>restaurant</mat-icon> Ingredientes</a>
+                    }
+                    <mat-divider></mat-divider>
+                    @if(hasPermission('Ver Usuarios')){
+                        <a mat-list-item class="menu-a" routerLink="usuarios"><mat-icon>person</mat-icon> Usuarios</a>
+                    }
+                    @if(hasPermission('Ver Roles')){
+                        <a mat-list-item class="menu-a" routerLink="roles"><mat-icon>security</mat-icon> Roles</a>
+                    }
+                    @if(hasPermission('Ver Permisos')){
+                        <a mat-list-item class="menu-a" routerLink="permisos"><mat-icon>assignmentind</mat-icon> Permisos</a>
+                    }
+                </ul>
+            </ng-container>
+        </app-authorized>
+
+        <!-- <app-authorized [role]="['Usuario']">
+            <ng-container authorized>
+                <ul>
+                    <a mat-list-item class="menu-a" routerLink="ordenes"><mat-icon>shopping_bag</mat-icon>Órdenes</a>
+                </ul>
+            </ng-container>
+        </app-authorized> -->
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar class="menu-sidenav-session">
+            <button mat-icon-button (click)="toogleSidenav()">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <div class="space-session">
+                <app-authorized>
+                    <ng-container authorized>
+                        <span>Hola {{userName}} {{userLastName}}</span>
+                        <a class="button-icon button-red" (click)="logout()"> <mat-icon>logout</mat-icon> Cerrar Sesión</a>
+                    </ng-container>
+
+                    <!-- <ng-container noAuthorized>
+                        <a>Login</a>
+                        <a>Registrar</a>
+                    </ng-container> -->
+                </app-authorized>
+            </div>
+        </mat-toolbar>
+
+        <!-- Aquí va el contenido principal de tu aplicación -->
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

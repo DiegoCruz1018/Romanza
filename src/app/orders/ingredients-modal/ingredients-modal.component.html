@@ -1,0 +1,26 @@
+<div class="modal">
+    <div class="container-button">
+        <button (click)="cancel()" mat-button><mat-icon>close</mat-icon></button>
+    </div>
+
+    <div class="container">
+        <h3>Agregar Ingredientes</h3>
+
+        <mat-grid-list cols="2">
+            @for(ingredient of data.ingredients; track $index){
+                <mat-grid-tile>
+                    <div class="info-ingredient">
+                        <p>{{ingredient.name}}</p>
+                        <p class="price">{{formatPrice(+ingredient.price)}}</p>
+                        <button class="button button-blue" (click)="addIngredient(ingredient)">Agregar</button>
+                    </div>
+                </mat-grid-tile>
+            }
+        </mat-grid-list>
+
+        <!-- Botón para guardar ingredientes -->
+        <!-- <div class="buttons-container">
+            <button class="button button-green" (click)="save()">Guardar</button>
+        </div> -->
+    </div>
+</div>

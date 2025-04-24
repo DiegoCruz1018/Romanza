@@ -16,6 +16,10 @@ export class ProductService {
   private http = inject(HttpClient);
   private urlBase = environment.apiURL + '/productos';
 
+  public getAll(): Observable<HttpResponse<ProductDTO[]>>{
+    return this.http.get<ProductDTO[]>(`${this.urlBase}/all`, {observe: 'response'});
+  }
+
   public get(pagination: PaginationDTO): Observable<HttpResponse<ProductDTO[]>>{
 
     let queryParams = buildQueryParams(pagination);

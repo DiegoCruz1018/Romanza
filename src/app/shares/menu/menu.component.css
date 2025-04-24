@@ -2,3 +2,92 @@ mat-toolbar nav{
     display: flex;
     gap: 2rem;
 }
+
+.sidenav-container {
+    height: 100%;
+    background-color: #edf0f4;
+}
+
+.sidenav {
+    width: 15rem;
+    /* background: #1f2023; */
+    /* background-color: #18181c; */
+    background-color: #1a1a1a;
+}
+
+mat-toolbar {
+    /* background: #17181b; */
+    /* background: #1f2023; */
+    /* background-color: #18181c; */
+    background-color: #1a1a1a;
+    color: white;
+}
+/* 
+h1 a{
+    color: white;
+    font-weight: 600;
+} */
+
+.logo{
+    margin: 4.5rem 3rem 0 1rem;
+}
+
+.logo-img {
+    height: 150px;
+    width: 150px;
+    /* clip-path: circle(32px at center); Esto recorta la imagen en un círculo, por ejemplo */ 
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+    margin-top: 5rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+mat-icon{
+    color: white;
+}
+
+.menu-a {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: .5rem;
+    border-radius: .5rem;
+    display: flex; /* Flexbox para alinear elementos */
+    flex-direction: row; /* Alinear elementos en fila (horizontal) */
+    align-items: center; /* Centrar ícono y texto verticalmente */
+}
+
+.menu-a:hover {
+    color: #17181b;
+    background-color: white;
+}
+
+.menu-a mat-icon {
+    margin-right: .5rem;
+    vertical-align: text-top;
+}
+
+.menu-a:hover mat-icon {
+    color: #17181b; /* Cambiar color del ícono en hover */
+}
+.menu-sidenav-session{
+    display: flex;
+    justify-content: space-between;
+}
+
+.space-session{
+    display: flex;
+    flex-direction: row;
+}
+
+.space-session span{
+    margin-right: 1rem;
+}

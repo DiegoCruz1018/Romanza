@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="form-container">
+        <h2>Editar usuario</h2>
+
+        @if(user){
+            <app-show-errors [errors]="errors"></app-show-errors>
+
+            <app-form-authentication 
+                [model]="user" 
+                (postForm)="save($event)" 
+                [noSelectedRoles]="noSelectedRoles" 
+                [selectedRoles]="selectedRoles"
+            >
+            </app-form-authentication>
+        }@else{
+            <img src="img/loading.gif" alt="Imagen Cargando">
+        }
+    </div>
+</div>

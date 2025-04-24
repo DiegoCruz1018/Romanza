@@ -1,0 +1,34 @@
+.modal{
+    height: 20rem;
+}
+.container-button{
+    display: flex;
+    justify-content: end;
+    margin: 1rem;
+}
+.container-button button{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.container h3{
+    text-align: center;
+}
+
+.info-ingredient{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+}
+.info-ingredient p{
+    margin: 0;
+    font-weight: bold;
+}
+.price{
+    color: rgb(2,119,2);
+}

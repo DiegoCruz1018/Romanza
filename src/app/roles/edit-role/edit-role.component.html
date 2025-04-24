@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="form-container">
+        <h2>Editar Rol</h2>
+
+        @if(role){
+            <app-show-errors [errors]="errors" ></app-show-errors>
+        
+            <app-form-role
+                [model]="role"
+                [noSelectedPermissions]="noSelectedPermissions"
+                [selectedPermissions]="selectedPermissions"
+                (postForm)="save($event)"
+            >
+            </app-form-role>
+        }@else {
+            <img src="img/loading.gif" alt="Imagen Cargando">
+        }
+
+    </div>
+</div>
