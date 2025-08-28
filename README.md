@@ -1,63 +1,40 @@
-# Romanza
-<<<<<<< HEAD
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+---
 
-## Development server
+## 📌 README para **Romanza**
 
-To start a local development server, run:
+# RomanzaFrontAngular
 
-```bash
-ng serve
-```
+Frontend desarrollado en **Angular 19**.  
+Incluye autenticación con **JWT**, manejo de **roles y permisos**, guards y persistencia en `localStorage`.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Características
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Login con JWT y persistencia de sesión.
+- Manejo de **roles (Administrador/Usuario)** y **permisos** desde el frontend.
+- Guards (`adminOrPermissionGuard`) que restringen vistas según permisos.
+- CRUD de:
+  - Productos
+  - Ingredientes
+  - Combos
+  - Órdenes
+  - Ventas
+- Integración con **Angular Material** para UI.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## ⚙️ Requisitos
 
-```bash
-ng generate --help
-```
+- [Node.js 20+](https://nodejs.org/)
+- [Angular CLI](https://angular.dev/cli)
+- Un backend corriendo de **RomanzaAPI**
 
-## Building
+---
 
-To build the project run:
+## 🔧 Configuración
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-=======
-Página para la administración de un negocio de pizzeria
->>>>>>> c26440a890b960e5730446709e46b89cb0041dff
+1. Clonar el repo:
+   git clone https://github.com/DiegoCruz1018/Romanza.git
+   cd Romanza
