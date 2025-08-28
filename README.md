@@ -3,7 +3,7 @@
 
 ## 📌 README para **Romanza**
 
-# RomanzaFrontAngular
+# Romanza
 
 Frontend desarrollado en **Angular 19**.  
 Incluye autenticación con **JWT**, manejo de **roles y permisos**, guards y persistencia en `localStorage`.
